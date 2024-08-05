@@ -57,13 +57,13 @@ async def start(client, message):
             InlineKeyboardButton('⚡️ ʜᴇʟᴘ', callback_data='help'),
             InlineKeyboardButton('⚡️ ᴀʙᴏᴜᴛ', callback_data='about')
             ],[
-            InlineKeyboardButton('⚡️ ᴍᴏᴠɪᴇ ʀᴇǫᴜᴇsᴛ', url='https://t.me/cinemahubmovierequest'),
-            InlineKeyboardButton('⚡️ ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ', url='https://t.me/cinemahdmovie')
+            InlineKeyboardButton('⚡️ᴍᴏᴠɪᴇ ʀᴇǫᴜᴇsᴛ', url='https://t.me/cinemahubmovierequest'),
+            InlineKeyboardButton('⚡️ ᴜᴘᴅᴀᴛᴇ', url='https://t.me/cinemahdmovie')
             ],[
-            InlineKeyboardButton('⚡️ ᴄᴏɴᴛᴀᴄᴛ ᴜs', url='https://t.me/Movie_Request_233bot')
+            InlineKeyboardButton('⚡️ᴄᴏɴᴛᴀᴄᴛ ᴜs', url='https://t.me/Movie_Request_233bot')
         ]]
         if CLONE_MODE == True:
-            buttons.append([InlineKeyboardButton('⚡️ ᴄʀᴇᴀᴛᴇ ʏᴏᴜʀ ᴏᴡɴ ᴄʟᴏɴᴇ ʙᴏᴛ', callback_data='clone')])
+            buttons.append([InlineKeyboardButton('⚡️ᴄʟᴏɴᴇ ʙᴏᴛ', callback_data='clone')])
         reply_markup = InlineKeyboardMarkup(buttons)
         me2 = (await client.get_me()).mention
         await message.reply_photo(
@@ -411,10 +411,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('⚡️ ʜᴇʟᴘ', callback_data='help'),
             InlineKeyboardButton('⚡️ ᴀʙᴏᴜᴛ', callback_data='about')
             ],[
-            InlineKeyboardButton('⚡️ ᴍᴏᴠɪᴇ ʀᴇǫᴜᴇsᴛ ɢʀᴏᴜᴘ', url='https://t.me/cinemahubmovierequest'),
-            InlineKeyboardButton('⚡️ ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ', url='https://t.me/cinemahdmovie')
+            InlineKeyboardButton('⚡️ᴍᴏᴠɪᴇ ʀᴇǫᴜᴇsᴛ', url='https://t.me/cinemahubmovierequest'),
+            InlineKeyboardButton('⚡️ᴜᴘᴅᴀᴛᴇ', url='https://t.me/cinemahdmovie')
             ],[
-            InlineKeyboardButton('⚡️ ᴄʀᴇᴀᴛᴇ ʏᴏᴜʀ ᴏᴡɴ ᴄʟᴏɴᴇ ʙᴏᴛ', callback_data='clone'),
+            InlineKeyboardButton('⚡️ᴄʟᴏɴᴇ ʙᴏᴛ', callback_data='clone'),
             InlineKeyboardButton('⚡️ ᴄᴏɴᴛᴀᴄᴛ ᴜs', url='https://t.me/Movie_Request_233bot')
             #],[
         ]]
