@@ -16,9 +16,9 @@ from pyrogram.errors import ChatAdminRequired, FloodWait
 from pyrogram.types import *
 from utils import verify_user, check_token, check_verification, get_token
 from config import *
-from pyrogram.enums import ChatMemberStatus
-from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
-from pyrogram.errors import FloodWait
+#from pyrogram.enums import ChatMemberStatus
+#from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
+#from pyrogram.errors import FloodWait
 
 import re
 import json
@@ -48,7 +48,7 @@ def get_size(size):
 # Don't Remove Credit Tg - @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ0
-
+'''
 async def is_subscribed(filter, client, update):
     user_id = update.from_user.id    
 
@@ -110,7 +110,7 @@ async def get_fsub1(uid, bot):
     btns.append([InlineKeyboardButton('Try Again', url=f'https://t.me/{me.username}?start=starts')])
    
     return btns
-
+'''
 
 @Client.on_message(filters.command('start') & filters.private & subscribed)
 async def not_joined(client, message):
