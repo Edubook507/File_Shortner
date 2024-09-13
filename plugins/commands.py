@@ -16,6 +16,10 @@ from pyrogram.errors import ChatAdminRequired, FloodWait
 from pyrogram.types import *
 from utils import verify_user, check_token, check_verification, get_token
 from config import *
+from pyrogram.enums import ChatMemberStatus
+from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
+from pyrogram.errors import FloodWait
+
 import re
 import json
 import base64
@@ -44,6 +48,87 @@ def get_size(size):
 # Don't Remove Credit Tg - @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ0
+
+async def is_subscribed(filter, client, update):
+    user_id = update.from_user.id    
+
+    subscribed_to_channel_1 = False
+    subscribed_to_channel_2 = False
+
+    try:
+        channel1, channel2 = FORCE_SUB_CHANNEL, FORCE_SUB_CHANNEL2
+
+        if channel1:
+            member_channel_1 = await client.get_chat_member(chat_id=channel1, user_id=user_id)
+            subscribed_to_channel_1 = member_channel_1.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]
+    except UserNotParticipant:
+        pass
+
+    try:
+        if channel2:
+            member_channel_2 = await client.get_chat_member(chat_id=channel2, user_id=user_id)
+            subscribed_to_channel_2 = member_channel_2.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]
+    except UserNotParticipant:
+        pass
+       
+    if (not channel1 or subscribed_to_channel_1) and (not channel2 or subscribed_to_channel_2):
+        return True
+    else:
+        return False
+
+subscribed = filters.create(is_subscribed)
+        
+
+
+
+async def get_fsub1(uid, bot):
+    btns = []
+    
+    try:
+        chat = FORCE_SUB_CHANNEL
+        chat2 = FORCE_SUB_CHANNEL2
+        
+        cha = await bot.get_chat(chat)
+        cha2 = await bot.get_chat(chat2)
+        
+        inv = (await bot.get_chat(chat)).invite_link
+        if not inv:
+            inv = await bot.create_chat_invite_link(chat_id=chat)
+        
+        inv2 = (await bot.get_chat(chat2)).invite_link
+        if not inv2:
+            inv2 = await bot.create_chat_invite_link(chat_id=chat2)
+        
+        member = await bot.get_chat_member(chat_id=chat, user_id=uid)
+    except UserNotParticipant:
+        btns.append([InlineKeyboardButton(f"Join {cha.title}", url=inv)])
+        btns.append([InlineKeyboardButton(f"Join {cha2.title}", url=inv2)])
+    except Exception as e:
+        print(f"Error: {e}")
+    
+    me = await bot.get_me()
+    btns.append([InlineKeyboardButton('Try Again', url=f'https://t.me/{me.username}?start=starts')])
+   
+    return btns
+
+
+@Client.on_message(filters.command('start') & filters.private & subscribed)
+async def not_joined(client, message):
+    uid = message.from_user.id
+    buttons = await get_fsubs(uid, client)
+              
+    await message.reply(
+        text = FORCE_MSG.format(
+                first = message.from_user.first_name,
+                last = message.from_user.last_name,
+                username = None if not message.from_user.username else '@' + message.from_user.username,
+                mention = message.from_user.mention,
+                id = message.from_user.id
+            ),
+        reply_markup = InlineKeyboardMarkup(buttons),
+        quote = True,
+        disable_web_page_preview = True
+    )
 
 
 @Client.on_message(filters.command("start") & filters.incoming)
