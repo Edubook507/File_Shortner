@@ -110,7 +110,7 @@ async def get_fsub1(uid, bot):
     btns.append([InlineKeyboardButton('Try Again', url=f'https://t.me/{me.username}?start=starts')])
    
     return btns
-'''
+
 
 @Client.on_message(filters.command('start') & filters.private & subscribed)
 async def not_joined(client, message):
@@ -129,7 +129,7 @@ async def not_joined(client, message):
         quote = True,
         disable_web_page_preview = True
     )
-
+'''
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
